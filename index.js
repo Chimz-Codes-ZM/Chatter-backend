@@ -119,8 +119,51 @@ app.get("/posts", async (req, res) => {
 
 app.get('/posts/:id', async (req, res) => {
   const { id } = req.params;
- const postDoc = await Post.findById(id).populate('author', ['username'])
- res.json(postDoc);
+ const postDoc = await Post.findById(id).populate('author', ['username']);
+ if (postDoc) {
+  postDoc.views++;
+  await postDoc.save();
+  res.json(postDoc);
+ } else {
+  res.status(404).json({ error: 'Post not found' });
+ }
+
 })
+
+app.put('/post/:id', async (req, res) => {
+  const postId = req.params.id;
+  const { title, summary, content } = req.body;
+  const { token } = req.cookies;
+
+  try {
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      const post = await Post.findById(postId);
+
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+
+      if (post.author.toString() !== info.id) {
+        return res.status(403).json({ error: 'Unauthorized' });
+      }
+
+      const updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        { title, summary, content },
+        { new: true }
+      );
+
+      res.json(updatedPost);
+    });
+  } catch (error) {
+    console.error('Error updating post', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 app.listen(4000);
