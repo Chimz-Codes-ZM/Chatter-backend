@@ -24,7 +24,7 @@ mongoose.connect(
   // password: YURZPRiMet5Dj22
 );
 
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
