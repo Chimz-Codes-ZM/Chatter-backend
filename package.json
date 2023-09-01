@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Chatter project backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chimz-Codes-ZM/Chatter-backend.git"
+  },
+  "author": "Chimwemwe Masona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chimz-Codes-ZM/Chatter-backend/issues"
+  },
+  "homepage": "https://github.com/Chimz-Codes-ZM/Chatter-backend#readme"
+}
