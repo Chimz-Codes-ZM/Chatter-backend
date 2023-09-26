@@ -15,7 +15,7 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = "clna;sdkfmadlkfwmera";
 
-// app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({credentials:true, origin:'https://chatter-wine.vercel.app/'}));
 app.use(express.json());
 app.use(cookieParser());
 
