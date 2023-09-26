@@ -15,14 +15,11 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = "clna;sdkfmadlkfwmera";
 
-app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+// app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(
-  "mongodb+srv://justplainrodney:YURZPRiMet5Dj22@cluster0.0yjtior.mongodb.net/?retryWrites=true&w=majority"
-  // password: YURZPRiMet5Dj22
-);
+mongoose.connect(process.env.MONGODB_CONNECT_URL);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -166,4 +163,4 @@ app.put('/post/:id', async (req, res) => {
 });
 
 
-app.listen(4000);
+
