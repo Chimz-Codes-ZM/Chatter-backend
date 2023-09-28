@@ -19,7 +19,7 @@ app.use(cors({credentials:true, origin:'https://chatter-wine.vercel.app/'}));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGODB_CONNECT_URL);
+mongoose.connect("mongodb+srv://justplainrodney:YURZPRiMet5Dj22@cluster0.0yjtior.mongodb.net/?retryWrites=true&w=majority");
 
 app.get("/", (req, res) => {
   res.send("Hello World");
